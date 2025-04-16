@@ -31,5 +31,9 @@ IDE: Visual Studio / Visual Studio Code
  
 HTTPS is enabled by default in ASP.NET Core. If needed, configure launchSettings.json or Kestrel server options to customize certificates or ports.
 
+# Author
+
+Developed by Uğur Akşahin
+
 
 
