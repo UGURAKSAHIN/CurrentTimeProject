@@ -27,4 +27,9 @@ IDE: Visual Studio / Visual Studio Code
 
 - MVC-based separation of concerns
 
+ # HTTPS Configuration
+ 
+HTTPS is enabled by default in ASP.NET Core. If needed, configure launchSettings.json or Kestrel server options to customize certificates or ports.
+
+
 
