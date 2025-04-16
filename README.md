@@ -15,7 +15,7 @@ Architecture: MVC (Model-View-Controller)
 
 Security: HTTPS
 
-Language: C#
+Language: C#, HTML, CSS, Javascript
 
 IDE: Visual Studio / Visual Studio Code
 
