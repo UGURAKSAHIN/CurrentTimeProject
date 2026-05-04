@@ -1062,14 +1062,29 @@ $.extend( $.validator, {
 		},
 
 		validationTargetFor: function( element ) {
+			var $element, selector;
 
 			// If radio/checkbox, validate first element in group instead
 			if ( this.checkable( element ) ) {
 				element = this.findByName( element.name );
 			}
 
+			// Avoid passing raw strings to jQuery() since they may be interpreted as HTML
+			if ( typeof element === "string" ) {
+				selector = trim( element );
+
+				// Reject HTML-like input; only CSS selectors are supported here
+				if ( /^<.+>$/.test( selector ) ) {
+					return;
+				}
+
+				$element = $( $.find( selector, this.currentForm ) );
+			} else {
+				$element = $( element );
+			}
+
 			// Always apply ignore filter
-			return $( element ).not( this.settings.ignore )[ 0 ];
+			return $element.not( this.settings.ignore )[ 0 ];
 		},
 
 		checkable: function( element ) {
