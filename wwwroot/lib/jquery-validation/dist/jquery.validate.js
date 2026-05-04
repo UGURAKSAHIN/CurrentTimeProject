@@ -1062,7 +1062,7 @@ $.extend( $.validator, {
 		},
 
 		validationTargetFor: function( element ) {
-			var $element;
+			var $element, selector;
 
 			// If radio/checkbox, validate first element in group instead
 			if ( this.checkable( element ) ) {
@@ -1070,9 +1070,18 @@ $.extend( $.validator, {
 			}
 
 			// Avoid passing raw strings to jQuery() since they may be interpreted as HTML
-			$element = typeof element === "string" ?
-				$( $.find( element, this.currentForm ) ) :
-				$( element );
+			if ( typeof element === "string" ) {
+				selector = trim( element );
+
+				// Reject HTML-like input; only CSS selectors are supported here
+				if ( /^<.+>$/.test( selector ) ) {
+					return;
+				}
+
+				$element = $( $.find( selector, this.currentForm ) );
+			} else {
+				$element = $( element );
+			}
 
 			// Always apply ignore filter
 			return $element.not( this.settings.ignore )[ 0 ];
